@@ -1,11 +1,8 @@
 # act.js - Small Javascript Library for Behavior Changing Functions #
 
 ## About ##
-act.js is a small library for creating javascript functions that can change 
-behavior, either externally or internally. Also supports changing the 'this'
-object used when invoking the behavior function and changing bound arguments
-on the behavior function.
-
+act.js is a small library for creating Javascript functions that can change
+their behavior, both externally or internally.
 
     // Create a function 'fib' that generates the Fibonacci numbers.
     var fib = act.on(function(x, y) {
@@ -32,7 +29,7 @@ on the behavior function.
     f(); -> 2
 
 
-# Using Composed.js #
+# Using act.js #
 act.js can be used either as an AMD style module or in the global scope.
 
 ## With AMD ##
@@ -64,22 +61,27 @@ Include act.js file directly and use 'act' global:
     </body>
 
 # Details #
-act.js is based around the idea of functions and behavior. act.js functions
-just regular Javascript functions that operate in a special way. Besides 
-just returning a value like in regular Javascript, act.js functions also 
-specify a replacement behavior to handle the next call to the function.
+act.js explores the idea of the function as an actor with mutable behavior.
+The concept of mutable behavior is implicit in many Javascript methods, but
+act.js makes behavior change more explicit and easier to work with in some
+situations.
 
-Replacement behavior may be set explicitly or implicitly. Not explicitly 
-specifiny a replacement behavior is the same as replacing the current behavior
+act.js style functions are just regular Javascript functions that operate in a
+special way. Besides returning a value, act.js functions also  specify a
+replacement behavior that will handle returning a value and specifying a
+replacement behavior the next time the function is invoked.
+
+Replacement behavior may be set explicitly or implicitly. Using the implicit 
+replacement behavior is the same as replacing the current behavior
 with itself.
 
 ## Behaviors ##
 act.js behaviors consist of three elements: an implementation function, a
 scope object, and a set of bound arguments. Only an implementation function is
-required, scope and bound arguments are optional.
+required, the scope and bound arguments are optional.
 
-The implementation function is the actual function that is invoked for the 
-behavior. It recieves the arguments from the act function and may return
+The implementation function is the function that is invoked for the behavior.
+It receives arguments from the act function and may return
 values and call 'this.become(...)' to specify a replacement behavior.
 
     var add = function(n){ return function(v){ return n + v; }; };
@@ -90,7 +92,7 @@ values and call 'this.become(...)' to specify a replacement behavior.
     f(1); -> 21
     f(2); -> 22
 
-The scope object is an object the object used as the scope when invoking the
+The scope object is the object used as the scope when invoking the
 implementation function.
 
     var f = act.as(function(){ return this.a; }, {a: 1});
@@ -98,8 +100,8 @@ implementation function.
     f.become(undefined, {a: 2});
     f(); -> 2
 
-The set of bound arguments are an array of arguments bound on the implementation
-function.
+The set of bound arguments is an array of leading arguments bound on the
+implementation function.
 
     var sum = function() {
         return Array.prototype.reduce.call(arguments, function(p, c) {
@@ -115,18 +117,18 @@ function.
     f(1, 2, 3); -> 26
 
 Not specifying an implementation function or scope object when creating a
-replacement behavior will automatially use the current behavior's value for the
+replacement behavior will automatically use the current behavior's value for the
 given object.
 
 ## Replacement Behavior ##
 act.js allows you to specify a replacement behavior to use when a function is next
 invoked. For external behavior changes, such as initial calls to 'act.as' or
 'act.on' and setting behavior explicitly, the behavior is used when the function
-is next called. The most recently specified behavior will be used
+is next called. The most recently specified behavior will be used.
 
 For internal behavior changes, the new replacement behavior is specified while
 the old behavior is still executing. The replacement behavior is the behavior 
-used when the function is next invoked. Mutltiple calls, or no, to become are
+used when the function is next invoked. Multiple calls to 'become' are
 allowed, but only the most recent replacement behavior is used. External
 behavior modification, in the case of 'act.as', may override internal
 replacement behavior.
