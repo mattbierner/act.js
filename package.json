@@ -1,0 +1,21 @@
+{
+  "name": "act.js",
+  "version": "0.0.0",
+  "description": "Javascript Library for Behavior Changing Functions",
+  "main": "lib/act.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mattbierner/act.js.git"
+  },
+  "keywords": [
+    "act",
+    "function"
+    "become",
+    "behavior",
+  ],
+  "author": "Matt Bierner",
+  "license": "MIT"
+}
