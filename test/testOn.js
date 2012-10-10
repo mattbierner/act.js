@@ -47,11 +47,11 @@ define(['act'], function(act){
             ["Bound On",
             function(){
                 function fib(x, y){
-                    this.become(undefined, undefined, y, x + y);
+                    this.become(undefined, undefined, [y, x + y]);
                     return x;
                 };
                 
-                var f = act.on(fib, undefined, 0, 1);
+                var f = act.on(fib, undefined, [0, 1]);
                 assert.deepEqual(f(), 0);
                 assert.deepEqual(f(), 1);
                 assert.deepEqual(f(), 1);

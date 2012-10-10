@@ -55,18 +55,18 @@ define(['act'], function(act){
             }],
             ["Bound As",
             function(){
-                var f = act.as(add(1), undefined, 10);
+                var f = act.as(add(1), undefined, [10]);
                 assert.deepEqual(f(5), 15);
                 
-                f.become(add(2), undefined, 10)
+                f.become(add(2), undefined, [10])
                 assert.deepEqual(f(5), 25);
             }],
             ["Override bound ",
             function(){
-                var f = act.as(add(1), undefined, 10);
+                var f = act.as(add(1), undefined, [10]);
                 assert.deepEqual(f(5), 15);
                 
-                f.become(undefined, undefined, 20)
+                f.become(undefined, undefined, [20])
                 assert.deepEqual(f(5), 25);
             }],
         ],

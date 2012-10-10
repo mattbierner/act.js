@@ -6,9 +6,9 @@ their behavior, both externally or internally.
 
     // Create a function 'fib' that generates the Fibonacci numbers.
     var fib = act.on(function(x, y) {
-        this.become(undefined, undefined, y, x + y);
+        this.become(undefined, undefined, [y, x + y]);
         return x;
-    }, undefined, 0, 1);
+    }, undefined, [0, 1]);
     
     fib(); -> 0
     fib(); -> 1
@@ -109,16 +109,16 @@ implementation function.
         });
     };
     
-    var f = act.as(sum, {}, 10);
+    var f = act.as(sum, {}, [10]);
     f(1); -> 11
     f(1, 2, 3); -> 16
-    f.become(undefined, undefined, 20);
+    f.become(undefined, undefined, [20]);
     f(1); -> 21
     f(1, 2, 3); -> 26
 
-Not specifying an implementation function or scope object when creating a
-replacement behavior will automatically use the current behavior's value for the
-given object.
+Not specifying an implementation function, scope object, or bound arguments when
+creating a replacement behavior will automatically use the current behavior's
+value for the given object.
 
 ## Replacement Behavior ##
 act.js allows you to specify a replacement behavior to use when a function is next
@@ -137,11 +137,11 @@ replacement behavior.
 # API #
 Overview of API. More detailed documentation can be found in the code.
 
-## act.as(function(...[*]): *, scope, ...boundArgs) ##
+## act.as(function(...[*]): *, scope, boundArgs: Array) ##
 Create a function that can have its behavior changed both internally and
 externally.
 
-## act.on(function(...[*]): *, scope, ...boundArgs) ##
+## act.on(function(...[*]): *, scope, boundArgs: Array) ##
 Same as 'act.as', but created function only supports internal replacement 
 behavior modification.
 
