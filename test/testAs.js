@@ -20,7 +20,7 @@ define(['act'], function(act){
                 assert.deepEqual((f = act.as(constant(1)))(), 1);
                 assert.deepEqual(f.become(constant(2))(), 2);
             }],
-                ["Multiple As",
+            ["Multiple As",
             function(){
                 var f = act.as(constant(1));
                 f.become(constant(10))
