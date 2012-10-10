@@ -133,8 +133,13 @@ replacement behavior.
 
 
 # API #
-Overview of API and examples. More detailed documentation can be found in the code.
+Overview of API. More detailed documentation can be found in the code.
 
 ## act.as(function(...[*]): *, scope, ...boundArgs) ##
-Create a function that can have its behavior change both internally and
+Create a function that can have its behavior changed both internally and
 externally.
+
+## act.on(function(...[*]): *, scope, ...boundArgs) ##
+Same as 'act.as', but created function only supports internal replacement 
+behavior modification.
+
