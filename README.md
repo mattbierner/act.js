@@ -2,7 +2,8 @@
 
 ## About ##
 act.js is a small library for creating Javascript functions that can change
-their behavior, both externally or internally.
+their behavior, both externally or internally. Also supports creating functions
+that select their behavior when called.
 
     // Create a function 'fib' that generates the Fibonacci numbers.
     var fib = act.on(function(x, y) {
@@ -145,3 +146,23 @@ externally.
 Same as 'act.as', but created function only supports internal replacement 
 behavior modification.
 
+## act.opt(function(...[*]): function(...[*]): *, selectScope) ##
+Factory for a function that selects its behavior using another function when
+called.
+
+    var constant = function(v) { return function(){ return v;}; };
+    
+    function fib(v) {
+        if (v === 0) return constant(0);
+        else if (v === 1) return constant(1);
+        return function() { return fib(v - 1)() + fib(v - 2)(); } 
+    };
+    
+    var f = act.opt(fib);
+    f(0); -> 0
+    f(1); -> 1
+    f(2); -> 1
+    f(3); -> 2
+    f(4); -> 3
+    f(5); -> 5
+    ...

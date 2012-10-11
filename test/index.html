@@ -18,10 +18,10 @@
             }
         });
         require(
-            ['act', 'testAs', 'testOn'],
-            function(be, testAs, testOn)
+            ['act', 'testAs', 'testOn', 'testOpt'],
+            function(be, testAs, testOn, testOpt)
             {
-                [testAs, testOn].forEach(function(m){
+                [testAs, testOn, testOpt].forEach(function(m){
                     m.module && module(m.module);
                     m.tests.forEach(function(e){ test.apply(this, e); });
             });
