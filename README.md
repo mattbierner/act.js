@@ -138,15 +138,15 @@ replacement behavior.
 # API #
 Overview of API. More detailed documentation can be found in the code.
 
-## act.as(function(...[*]): *, scope, boundArgs: Array) ##
+## act.as(function(...[\*]): \*, scope, boundArgs: Array) ##
 Create a function that can have its behavior changed both internally and
 externally.
 
-## act.on(function(...[*]): *, scope, boundArgs: Array) ##
+## act.on(function(...[\*]): \*, scope, boundArgs: Array) ##
 Same as 'act.as', but created function only supports internal replacement 
 behavior modification.
 
-## act.opt(function(...[*]): function(...[*]): *, selectScope) ##
+## act.opt(function(...[\*]): function(...[\*]): \*, selectScope) ##
 Factory for a function that selects its behavior using another function when
 called.
 
